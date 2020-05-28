@@ -1,0 +1,23 @@
+{
+  "name": "@stroll/drag",
+  "version": "0.0.1",
+  "description": "vue 拖拽",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stroll-liu/drag.git"
+  },
+  "keywords": [
+    "vue",
+    "drag"
+  ],
+  "author": "stroll-liu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stroll-liu/drag/issues"
+  },
+  "homepage": "https://github.com/stroll-liu/drag#readme"
+}
