@@ -1,6 +1,6 @@
-module.exports = {
+export default {
   install: function (Vue) {
-    Vue.directive('dialogDrag', {
+    Vue.directive('sDragDialog', {
       bind: function (el, binding) {
         var _dragEl = []
         var dragEl = {}
@@ -37,7 +37,6 @@ module.exports = {
           var sty = function (dom, attr) { return getComputedStyle(dom, false)[attr] }
         }
 
-        console.log(binding, 'drag')
         function onmousedown (e) {
           var disX = e.clientX - dragEl[_dragEl[0]].offsetLeft
           var disY = e.clientY - dragEl[_dragEl[0]].offsetTop
@@ -95,6 +94,104 @@ module.exports = {
           dragEl[el].onmousedown = onmousedown
         })
       }
+    })
+
+    Vue.directive('sDrag', {
+      inserted: function(el) {
+        el.style.position = 'fixed'
+        el.style.zIndex = '99999'
+        // el.style.right = '9%'
+        // el.style.bottom = '9%'
+        el.onmousedown = function(e) {
+          var disX = e.clientX - el.offsetLeft
+          var disY = e.clientY - el.offsetTop
+    
+          if (el.setCapture) {
+            el.setCapture()
+          }
+          document.onmousemove = function(e) {
+            e.preventDefault()
+            var L = e.clientX - disX
+            var T = e.clientY - disY
+    
+            L = Math.min(Math.max(L, 0), document.documentElement.clientWidth - el.offsetWidth)
+            T = Math.min(Math.max(T, 0), document.documentElement.clientHeight - el.offsetHeight)
+    
+            el.style.left = L + 'px'
+            el.style.top = T + 'px'
+          }
+          document.onmouseup = function() {
+            document.onmousemove = document.onmousedown = null
+            if (el.releaseCapture) {
+              el.releaseCapture()
+            }
+          }
+        }
+      }
+    })
+
+    Vue.directive('sDragSort', {
+      bind: function (el, vnode) {
+        var box1 = el.querySelector('.box1')
+        var box2 = el.querySelector('.box2')
+
+        var box1child = box1.childNodes
+
+        box1child.forEach(item => {
+          if(item.nodeName == "#text" && !/\s/.test(box1child.nodeValue)){
+            document.getElementById("test").removeChild(item)
+          } else {
+            item.setAttribute('draggable', true)
+            item.addEventListener('ondragstart', function (event) {
+              event.dataTransfer.setData('text/plain', 'This text may be dragged')
+            })
+          }
+        })
+
+        box2.ondragover = box1.ondragover = function (event) {
+          event.preventDefault()
+        }
+        
+        // document.addEventListener("drag", function(event) {
+        //   console.log('bind-drag', event)
+        // }, false)
+
+        // document.addEventListener("dragstart", function(event) {
+        //   console.log('bind-dragstart', event)
+        // }, false);
+        
+        document.addEventListener("dragend", function(event) {
+          console.log('bind-dragend', event)
+        }, false);
+        
+        // document.addEventListener("dragover", function(event) {
+        //   console.log('bind-dragover', event)
+        // }, false);
+        
+        // document.addEventListener("dragenter", function(event) {
+        //   console.log('bind-dragenter', event)
+        // }, false);
+        
+        // document.addEventListener("dragleave", function(event) {
+        //   console.log('bind-dragleave', event)
+        // }, false);
+        
+        // document.addEventListener("drop", function(event) {
+        //   console.log('bind-dragleave', event)
+        // }, false);
+      }
+      // inserted: function () {
+      //   setTimeout(() => {console.log('inserted')}, 2000)
+      // },
+      // update: function () {
+      //   setTimeout(() => {console.log('update')}, 1000)
+      // },
+      // componentUpdated: function () {
+      //   setTimeout(() => {console.log('componentUpdated')}, 20)
+      // },
+      // unbind: function () {
+      //   setTimeout(() => {console.log('unbind')}, 3000)
+      // }
     })
   }
 }
