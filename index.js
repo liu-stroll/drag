@@ -138,7 +138,7 @@ export default {
         var box1child = box1.childNodes
 
         box1child.forEach(item => {
-          if(item.nodeName == "#text" && !/\s/.test(box1child.nodeValue)){
+          if(item.nodeName == "#text" && !/\s/.test(bogitx1child.nodeValue)){
             document.getElementById("test").removeChild(item)
           } else {
             item.setAttribute('draggable', true)
@@ -184,7 +184,8 @@ export default {
 
         // 当开始拖动一个元素或选中的文本时触发
         document.addEventListener("dragstart", function(event) {
-          // console.log('bind-dragstart', event)
+          console.log('bind-dragstart', event)
+          this.
         }, false);
         
         // 当元素或选中的文本在可释放目标上被释放时触发
