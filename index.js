@@ -152,33 +152,45 @@ export default {
           event.preventDefault()
         }
         
-        // document.addEventListener("drag", function(event) {
-        //   console.log('bind-drag', event)
-        // }, false)
-
-        // document.addEventListener("dragstart", function(event) {
-        //   console.log('bind-dragstart', event)
-        // }, false);
+        // 当拖动元素或选中的文本时触发
+        document.addEventListener("drag", function(event) {
+          // console.log('bind-drag', event)
+        }, false)
         
+        // 当拖拽操作结束时触发 (比如松开鼠标按键或敲“Esc”键)
         document.addEventListener("dragend", function(event) {
-          console.log('bind-dragend', event)
+          // console.log('bind-dragend', event)
+        }, false);
+
+        // 当元素变得不再是拖动操作的选中目标时触发
+        document.addEventListener("dragexit", function(event) {
+          // console.log('bind-dragexit', event)
+        }, false);
+
+        // 当拖动元素或选中的文本到一个可释放目标时触发
+        document.addEventListener("dragenter", function(event) {
+          // console.log('bind-dragenter', event)
         }, false);
         
-        // document.addEventListener("dragover", function(event) {
-        //   console.log('bind-dragover', event)
-        // }, false);
+        // 当拖动元素或选中的文本离开一个可释放目标时触发。
+        document.addEventListener("dragleave", function(event) {
+          // console.log('bind-dragleave', event)
+        }, false);
+
+        // 当元素或选中的文本被拖到一个可释放目标上时触发
+        document.addEventListener("dragover", function(event) {
+          // console.log('bind-dragover', event)
+        }, false);
+
+        // 当开始拖动一个元素或选中的文本时触发
+        document.addEventListener("dragstart", function(event) {
+          // console.log('bind-dragstart', event)
+        }, false);
         
-        // document.addEventListener("dragenter", function(event) {
-        //   console.log('bind-dragenter', event)
-        // }, false);
-        
-        // document.addEventListener("dragleave", function(event) {
-        //   console.log('bind-dragleave', event)
-        // }, false);
-        
-        // document.addEventListener("drop", function(event) {
-        //   console.log('bind-dragleave', event)
-        // }, false);
+        // 当元素或选中的文本在可释放目标上被释放时触发
+        document.addEventListener("drop", function(event) {
+          console.log('bind-dragleave', event)
+        }, false);
       }
       // inserted: function () {
       //   setTimeout(() => {console.log('inserted')}, 2000)
