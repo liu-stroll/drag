@@ -37,7 +37,6 @@ module.exports = {
           var sty = function (dom, attr) { return getComputedStyle(dom, false)[attr] }
         }
 
-        console.log(binding, 'drag')
         function onmousedown (e) {
           var disX = e.clientX - dragEl[_dragEl[0]].offsetLeft
           var disY = e.clientY - dragEl[_dragEl[0]].offsetTop
@@ -66,7 +65,7 @@ module.exports = {
           };
       
           document.onmousemove = function (e) {
-            // 通过事件委托，计算移动的距离 
+            // 通过事件委托，计算移动的距离
             var left = e.clientX - disX;
             var top = e.clientY - disY;
       
