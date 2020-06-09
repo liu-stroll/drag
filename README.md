@@ -17,7 +17,8 @@ Vue.use(Drag)
 ```
 ## 调用
 ```html
-// 需要拖拽的组件添加 v-dialogDrag
+// 弹窗拖拽
+// 需要拖拽的组件添加 v-sDragDialog
 // v-dialogDrag 可以传两个参数 drag 和 modal（v-dialogDrag="{ drag: 'ivu-modal-header', modal: 'ivu-modal' }"）；
 //              也可不传，不穿默认 iviewUI 的 Modal 组件类名
 // drag 为 鼠标按下部分 class 名，可传 字符串 （drag: 'ivu-modal-header'）或 数组（drag: ['ivu-modal-header', 'ivu-modal-footer]）
@@ -30,3 +31,19 @@ Vue.use(Drag)
   </div>
 </div>
 ```
+
+```html
+// 拖拽
+// 需要拖拽的组件添加 v-sDrag
+<div v-sDrag>
+  // ...
+</div>
+```
+<!-- 
+```html
+// 拖放
+// 需要拖拽的组件添加 v-sDragSort
+<div v-sDragSort>
+  // ...
+</div>
+``` -->

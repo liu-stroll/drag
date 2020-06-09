@@ -141,13 +141,21 @@ export default {
         var borderArr = ['1px solid #ccc', '2px dashed #000']
         var arr = []
 
-        box1child.forEach(item => {
-          if(item.nodeName == "#text" && !/\s/.test(item.nodeValue)){
-            document.getElementById("test").removeChild(item)
-          } else {
-            item.setAttribute('draggable', true)
-          }
-        })
+        function elNodes (childNodes) {
+          childNodes.forEach(item => {
+            console.log(item)
+            if (item.nodeName !== '#text') {
+              item.setAttribute('draggable', true)
+            }
+            var itemChild = item.childNodes
+            console.log('itemChild', itemChild, itemChild.length)
+            if (itemChild && itemChild.length) {
+              elNodes(itemChild)
+            }
+          })
+        }
+
+        elNodes(box1child)
 
         // box1.ondragStart = dragStart
         // box2.ondragStart = dragStart
@@ -194,11 +202,12 @@ export default {
           // e.stopPropagation && e.stopPropagation()
           // e.preventDefault && e.preventDefault()
           this.style.border = borderArr[0]
+          arr.forEach.call(box1child, function (col) {
+            col.style.border = borderArr[0]
+          })
           var data = e.dataTransfer.getData('Text')
           var el = document.getElementById(data)
-          console.log(el)
           e.target.appendChild(el)
-          console.log('可释放目标上被释放时触发', e.dataTransfer, e.target)
         }
         function dragEnd (e) { // 当拖拽操作结束时触发
           // console.log('当拖拽操作结束时触发', e, e.dataTransfer, e.target)
